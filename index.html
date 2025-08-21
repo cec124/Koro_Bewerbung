@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cecilia Vludwig – Profil-Deluxe (KoRo-Stil Mockup)</title>
+  <!-- Fonts vorab laden, damit sie sicher greifen (optional, aber hilft auf GitHub Pages) -->
+  <link rel="preload" href="./assets/fonts/Radian%20Book.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="./assets/fonts/velourraw-trial-semibold.ttf" as="font" type="font/ttf" crossorigin>
+  <style>
+    /* ===============================
+       🔧 FARBCONTROLLE – HIER ÄNDERN
+       ===============================
+       Passe die beiden Variablen unten an:
+       --brand = Header-Farbe
+       --btn   = Button-Farbe (auch aktive Tabs)
+    */
+    :root{--bg:#f7f3ec;--surface:#fff;--ink:#111;--muted:#6b7280;--border:#e5e7eb;--radius:14px;--shadow:0 1px 0 rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+      --brand:#697e43; /* Header */
+      --btn:#98c275;   /* Buttons / aktive Tabs */
+    }
+
+    /* ===============================
+       🅰️ EIGENE SCHRIFT EINBINDEN (lokale Dateien – DEINE ANGABEN)
+       -------------------------------------------------------------
+       Du hast mir Folgendes gegeben:
+       - Headline-Font (Name fett):  ./assets/fonts/velourraw-trial-semibold.ttf
+       - Text-Font:                   ./assets/fonts/velourraw-trial-semibold.ttf
+
+       👍 Hinweis: WOFF2 ist performanter, aber TTF funktioniert. Pfade RELATIV halten (./assets/...).
+    */
+    @font-face{
+      font-family:'CeciliaHead';                           /* Überschriften */
+      src:url('./assets/fonts/velourraw-trial-semibold.ttf') format('truetype');
+      font-weight:600; font-style:normal; font-display:swap;
+    }
+    /* Text-Font: RADIAN – ersetze die Pfade unten durch deine Datei(en)
+       Lege die Dateien z. B. hier ab:
+       ./assets/fonts/Radian/radian-regular.woff2
+       ./assets/fonts/Radian/radian-regular.ttf
+       (WOFF2 bevorzugt; TTF als Fallback ist ok)
+    */
+    /* Text-Font: RADIAN – verlinkt auf deine Datei mit Leerzeichen im Namen */
+    @font-face{
+      font-family:'RadianText';
+      /* Pfad exakt so lassen oder anpassen. Leerzeichen im Dateinamen sind ok, hier mit %20 escaped */
+      src:url('./assets/fonts/Radian%20Book.otf') format('opentype');
+      font-weight:400; font-style:normal; font-display:swap;
+    }
+
+    /* 🅱️ Alternative (Google Fonts):
+       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+       Dann unten in body 'CeciliaText' -> 'Inter' und in .meta h1 'CeciliaHead' -> 'Inter'.
+    */
+
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+         font-family:'RadianText', ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
+    a{color:inherit}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+    .topline{background:#fff;border-bottom:1px solid var(--border);font-size:12px}
+    .topline .bar{display:flex;align-items:center;justify-content:space-between;padding:8px 0}
+    .dots{display:inline-block;width:6px;height:6px;border-radius:999px;background:var(--ink);margin-right:8px}
+
+    /* Header nutzt jetzt --brand. Text im Header wird auf weiß gesetzt. */
+    header{position:sticky;top:0;background:var(--brand);border-bottom:1px solid rgba(0,0,0,.15);z-index:40}
+    header .row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;color:#fff}
+    .brand{display:flex;align-items:center;gap:10px}
+    .brand .logo{width:32px;height:32px;object-fit:contain} /* <img> Logo, siehe Kommentar im HTML */
+    .brand-name{font-size:14px;font-weight:600;letter-spacing:.2px;color:#fff}
+    .nav{display:flex;gap:20px;font-size:14px}
+    .nav a{color:#fff;text-decoration:none}
+    .nav a:hover{opacity:.9}
+
+    /* Buttons
+       - .pill = neutrale Buttons mit grüner Kontur
+       - .pill.primary = gefüllte Buttons in --btn
+       Ändere --btn oben, um alle grünen Buttons zu steuern. */
+    .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--btn);border-radius:999px;padding:8px 14px;background:#fff;cursor:pointer;color:#23401a;text-decoration:none}
+    .pill.primary{background:var(--btn);color:#fff;border-color:var(--btn)}
+    .pill:hover{filter:brightness(.98)}
+
+    .crumbs{font-size:12px;color:#666;padding:12px 0}
+    .crumbs span.sep{margin:0 6px}
+    main.grid{display:grid;grid-template-columns:1fr;gap:24px;padding:8px 0 80px}
+    @media(min-width:900px){main.grid{grid-template-columns:7fr 5fr}}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .gallery .main{position:relative}
+    .gallery .main img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f3f4f6;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
+    .gallery .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px}
+    .thumbs button{border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer}
+    .thumbs button.active{outline:2px solid var(--brand)}
+    .thumbs img{width:100%;height:64px;object-fit:cover}
+    .carousel{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.9);border-radius:999px;box-shadow:var(--shadow);display:flex;gap:4px;padding:4px}
+    .iconbtn{border:none;background:transparent;border-radius:999px;padding:6px;cursor:pointer}
+    .iconbtn:hover{background:#f3f4f6}
+
+    .meta h1{font-size:28px;margin:4px 0 0; font-family:'CeciliaHead', ui-sans-serif, system-ui; font-weight:600}
+    .muted{color:#666;font-size:14px}
+    .badge{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:2px 10px;font-size:12px;background:#fff}
+    .bullets{margin:12px 0 0 0;padding-left:18px;list-style:none}
+    .bullets li{position:relative;margin:6px 0;padding-left:12px}
+    .bullets li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;background:var(--ink);border-radius:999px}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+    .info-tile{border:1px solid var(--border);border-radius:12px;padding:12px;background:#fff}
+    .info-tile .label{color:#666;font-size:12px}
+    .cta{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin-top:16px}
+
+    .tabs{margin-top:32px}
+    .tabbar{display:flex;gap:8px;flex-wrap:wrap}
+    /* Aktiver Tab jetzt auch in --btn */
+    .tab{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;cursor:pointer}
+    .tab.active{background:var(--btn);color:#fff;border-color:var(--btn)}
+
+    .desc{display:grid;grid-template-columns:1fr;gap:24px;margin-top:16px}
+    @media(min-width:900px){.desc{grid-template-columns:2fr 1fr}}
+    .values .row{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:6px 0;font-size:14px}
+
+    .cards{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.cards{grid-template-columns:repeat(3,1fr)}}
+    .project{padding:14px}
+    .proj-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;font-size:14px}
+
+    .refs{display:grid;grid-template-columns:1fr;gap:16px}
+    @media(min-width:900px){.refs{grid-template-columns:1fr 1fr}}
+
+    .form{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:900px){.form{grid-template-columns:repeat(3,1fr)}}
+    input,textarea{width:100%;border:1px solid var(--border);border-radius:12px;padding:10px 12px;font-size:14px;background:#fff}
+    textarea{grid-column:1 / -1;min-height:120px}
+
+    footer{background:#f1ebdf;border-top:1px solid var(--border);padding:40px 0;font-size:14px}
+    .fgrid{display:grid;grid-template-columns:1fr;gap:20px}
+    @media(min-width:900px){.fgrid{grid-template-columns:1fr 1fr 1fr}}
+    .copy{color:#777;font-size:12px;margin-top:16px}
+  /* Subtabs in FAQ */
+    .subtabbar{display:flex;gap:8px;flex-wrap:wrap}
+    .subtab{border:1px solid var(--border);background:#fff;border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+    .subtab.active{background:var(--btn);color:#fff;border-color:var(--btn)}
+  </style>
+</head>
+<body>
+  <div class="topline">
+    <div class="container bar">
+      <div style="display:flex;gap:24px;align-items:center">
+        <span><span class="dots"></span>Schnelle Antwort</span>
+        <span><span class="dots"></span>Transparente Zusammenarbeit</span>
+        <span class="hide-sm"><span class="dots"></span>Faire Konditionen</span>
+      </div>
+      <div class="muted">Österreich | DE</div>
+    </div>
+  </div>
+
+  <header>
+    <div class="container row">
+      <div class="brand">
+        <!-- LOGO EINBINDEN:
+             1) Lege dein Logo unter: ./assets/logo.svg (oder .png)
+             2) Pfad unten anpassen. Für GitHub Pages IMMER relativer Pfad (./assets/...).
+        -->
+        <img class="logo" src="./assets/KoRo_Logo_w.png" alt="Logo Cecilia Vludwig" />
+        <span class="brand-name">Profil-Deluxe</span>
+      </div>
+      <nav class="nav">
+        <a href="#desc">Beschreibung</a>
+        <a href="#faq">FAQs</a>
+        <a href="#refs">Referenzen</a>
+      </nav>
+      <!-- CV verlinken: Lege deine PDF unter ./assets/Cecilia-Vludwig-CV.pdf -->
+      <a class="pill primary" href="./assets/Cecilia-Vludwig-CV.pdf" download title="PDF CV herunterladen">📥 CV herunterladen</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="crumbs">
+      <a href="#">Überblick</a><span class="sep">/</span>
+      <a href="#">Kreative Bewerbungen</a><span class="sep">/</span>
+      <span style="color:#222">Cecilia Vludwig</span>
+    </div>
+  </div>
+
+  <main class="container grid">
+    <section class="gallery card">
+      <div class="main">
+        <img id="mainImg" src="assets/photos/cecilia-1.png" alt="Cecilia Vludwig" />
+        <div class="carousel">
+          <button class="iconbtn" onclick="prevImg()">◀️</button>
+          <button class="iconbtn" onclick="nextImg()">▶️</button>
+        </div>
+      </div>
+      <div class="thumbs" id="thumbs"></div>
+    </section>
+
+    <aside>
+      <div class="badge">Profil</div>
+      <div class="meta">
+        <h1>Cecilia Vludwig</h1>
+        <div class="muted" style="margin-top:4px">UX/UI Designer:in · Macht Komplexes einfach und Schönes nützlich.</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:12px">
+        <div class="muted">★★★★★ (12) Referenzen</div>
+        <div style="text-align:right">
+          <div style="font-size:24px;font-weight:600">Verfügbar</div>
+          <div class="muted">ab September 2025</div>
+        </div>
+      </div>
+      <ul class="bullets">
+        <li>Fokus auf nutzerzentrierte Flows</li>
+        <li>Stark in Figma & Prototyping</li>
+        <li>Geübt in AB-Tests & Research</li>
+        <li>Barrierefreiheit im Blick</li>
+        <li>Teamwork & saubere Handoffs</li>
+      </ul>
+      <div style="margin-top:16px">
+        <div style="font-size:12px;color:#666;margin-bottom:6px">Schwerpunkt</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="pill primary" onclick="setFocus(this)">UX/UI</button>
+          <button class="pill" onclick="setFocus(this)">Product Design</button>
+          <button class="pill" onclick="setFocus(this)">Research</button>
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div style="font-size:12px;color:#666;margin-bottom:6px">Kontaktpaket</div>
+        <div class="grid-2">
+          <button class="pill primary" onclick="setPack(this)">Ein Gespräch</button>
+          <button class="pill" onclick="setPack(this)">Portfolio-Review</button>
+          <button class="pill" onclick="setPack(this)">Mini-Workshop</button>
+        </div>
+      </div>
+      <div class="cta">
+        <button class="pill primary">✉️ Jetzt anfragen</button>
+        <button class="pill">📞 Rückruf</button>
+      </div>
+      <div class="muted" style="margin-top:6px">Sofort antwortbereit · i. d. R. innerhalb von 24h</div>
+      <div class="grid-2" style="margin-top:16px">
+        <div class="info-tile"><div class="label">Standort</div><div>Wien, AT</div></div>
+        <div class="info-tile"><div class="label">Erfahrung</div><div>5+ Jahre</div></div>
+        <div class="info-tile"><div class="label">Arbeitsweise</div><div>Remote & Onsite</div></div>
+        <div class="info-tile"><div class="label">Sprachen</div><div>DE, EN, IT</div></div>
+      </div>
+    </aside>
+  </main>
+
+  <section id="desc" class="container tabs">
+    <div class="tabbar">
+      <button class="tab active" data-tab="beschreibung" onclick="switchTab(event)">Beschreibung</button>
+      <button class="tab" data-tab="faq" onclick="switchTab(event)">FAQs</button>
+      <button class="tab" data-tab="portfolio" onclick="switchTab(event)">Portfolio</button>
+      <button class="tab" data-tab="refs" onclick="switchTab(event)">Referenzen</button>
+    </div>
+
+    <div id="panel-beschreibung" class="panel" style="margin-top:16px">
+      <div class="desc">
+        <div>
+          <h3 style="font-size:18px;margin:8px 0 8px">Für den Alltag im Team</h3>
+          <p class="muted" style="line-height:1.6">Cecilia gestaltet verständliche Interfaces, moderiert Workshops und bringt Struktur in Prozesse. Erfahrung von Research bis Delivery, mit Gespür für Barrierefreiheit und Impact.</p>
+          <p class="muted" style="line-height:1.6">Ob kurz für ein Sparring oder länger im Produktteam – die Zusammenarbeit ist pragmatisch, transparent und iterativ.</p>
+        </div>
+        <div class="card" style="padding:14px">
+          <div style="font-weight:600;margin-bottom:8px">Profilwerte (Ø)</div>
+          <div class="values">
+            <div class="row"><span>Research</span><span>80%</span></div>
+            <div class="row"><span>Prototyping</span><span>85%</span></div>
+            <div class="row"><span>UI Design</span><span>90%</span></div>
+            <div class="row"><span>HTML/CSS</span><span>75%</span></div>
+            <div class="row" style="border-bottom:none"><span>Teamwork</span><span>100%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a id="faq"></a>
+    <div id="panel-faq" class="panel" style="display:none;margin-top:16px">
+      <!-- FAQ-Subtabs: mehrere Unterbereiche -->
+      <div class="subtabbar">
+        <button class="subtab active" data-subtab="ablauf" onclick="switchSubtab(event)">Ablauf</button>
+        <button class="subtab" data-subtab="tools" onclick="switchSubtab(event)">Tools</button>
+        <button class="subtab" data-subtab="verfugbarkeit" onclick="switchSubtab(event)">Verfügbarkeit</button>
+        <button class="subtab" data-subtab="ausbildung" onclick="switchSubtab(event)">Ausbildung</button>
+        <button class="subtab" data-subtab="erfahrung" onclick="switchSubtab(event)">Arbeitserfahrung</button>
+        <button class="subtab" data-subtab="hobbys" onclick="switchSubtab(event)">Hobbys</button>
+        <button class="subtab" data-subtab="koro" onclick="switchSubtab(event)">KoRo‑Lieblingsprodukte</button>
+      </div>
+
+      <!-- Ablauf -->
+      <div id="sub-ablauf" class="subpanel" style="margin-top:12px">
+        <details class="card" style="padding:14px;margin-bottom:8px">
+          <summary><strong>Wie läuft die Zusammenarbeit ab?</strong></summary>
+          <div class="muted" style="margin-top:8px">Kickoff-Workshop, Scope-Definition, zweiwöchige Iterationen, wöchentliche Syncs.</div>
+        </details>
+      </div>
+
+      <!-- Tools -->
+      <div id="sub-tools" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px;margin-bottom:8px">
+          <summary><strong>Welche Tools werden genutzt?</strong></summary>
+          <div class="muted" style="margin-top:8px">Figma, FigJam, Notion, Jira, Maze, UsabilityHub – je nach Team-Setup.</div>
+        </details>
+      </div>
+
+      <!-- Verfügbarkeit -->
+      <div id="sub-verfugbarkeit" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px">
+          <summary><strong>Verfügbarkeit & Modell</strong></summary>
+          <div class="muted" style="margin-top:8px">Ab September 2025, 3–5 Tage/Woche, Freelance oder Festanstellung nach Absprache.</div>
+        </details>
+      </div>
+
+      <!-- Ausbildung -->
+      <div id="sub-ausbildung" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px;margin-bottom:8px">
+          <summary><strong>Ausbildung</strong></summary>
+          <ul class="bullets" style="margin-top:8px">
+            <li>BA Kommunikationsdesign – FH XY (2017–2020)</li>
+            <li>UX Bootcamp – ABC Academy (2021)</li>
+            <li>Laufende Kurse: Accessibility & Design Systems</li>
+          </ul>
+        </details>
+      </div>
+
+      <!-- Arbeitserfahrung -->
+      <div id="sub-erfahrung" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px;margin-bottom:8px">
+          <summary><strong>Arbeitserfahrung</strong></summary>
+          <ul class="bullets" style="margin-top:8px">
+            <li>Product Designer – Firma A (2022–2025): Checkout-Redesign, +18% Conversion</li>
+            <li>UX/UI Designer – Studio B (2020–2022): Design System, -35% Inkonsistenzen</li>
+            <li>Freelance (laufend): Mobile Onboarding, +22% Activation</li>
+          </ul>
+        </details>
+      </div>
+
+      <!-- Hobbys -->
+      <div id="sub-hobbys" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px;margin-bottom:8px">
+          <summary><strong>Hobbys</strong></summary>
+          <ul class="bullets" style="margin-top:8px">
+            <li>Siebdruck & Lettering</li>
+            <li>Trailrunning</li>
+            <li>Kaffee-Röstexperimente</li>
+          </ul>
+        </details>
+      </div>
+
+      <!-- KoRo Lieblingsprodukte -->
+      <div id="sub-koro" class="subpanel" style="display:none;margin-top:12px">
+        <details class="card" style="padding:14px">
+          <summary><strong>Lieblingsprodukte von KoRo</strong></summary>
+          <ul class="bullets" style="margin-top:8px">
+            <li>Protein Bar Deluxe Vegan Raspberry Choc</li>
+            <li>Geröstete und gesalzene Bohnen-Erbsen-Mix</li>
+            <li>Bio Süßkartoffelchips</li>
+            <li>Bio Kakaonibs</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+
+    <div id="panel-portfolio" class="panel" style="display:none;margin-top:16px">
+      <div class="cards">
+        <div class="card project">
+          <div style="font-weight:600">Abo-Checkout Redesign</div>
+          <div class="muted" style="margin-top:8px">Discovery → Prototyp → AB-Test.</div>
+          <div class="proj-foot"><span class="muted">👍 +18% Conversion</span><a href="#" style="text-decoration:underline">Details ↗️</a></div>
+        </div>
+        <div class="card project">
+          <div style="font-weight:600">Design System Aufbau</div>
+          <div class="muted" style="margin-top:8px">Token-basiert, Storybook-Doku.</div>
+          <div class="proj-foot"><span class="muted">👍 -35% UI-Inkonsistenzen</span><a href="#" style="text-decoration:underline">Details ↗️</a></div>
+        </div>
+        <div class="card project">
+          <div style="font-weight:600">Mobile Onboarding</div>
+          <div class="muted" style="margin-top:8px">Iterativ mit Nutzertests.</div>
+          <div class="proj-foot"><span class="muted">👍 +22% Activation</span><a href="#" style="text-decoration:underline">Details ↗️</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="panel-refs" class="panel" style="display:none;margin-top:16px">
+      <div class="refs">
+        <div class="card" style="padding:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:600">Lea K.</div><div class="muted" style="font-size:12px">Head of Product</div></div>
+            <div>★★★★★</div>
+          </div>
+          <p class="muted" style="margin-top:8px">Bringt Struktur in jedes Chaos.</p>
+        </div>
+        <div class="card" style="padding:14px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:600">Milan R.</div><div class="muted" style="font-size:12px">Engineering Manager</div></div>
+            <div>★★★★★</div>
+          </div>
+          <p class="muted" style="margin-top:8px">Schnelle Iteration, top Handoffs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" class="container" style="margin-top:24px">
+    <div class="card" style="padding:16px">
+      <div style="font-weight:600;margin-bottom:8px">Kontakt aufnehmen</div>
+      <form class="form" onsubmit="event.preventDefault()">
+        <input placeholder="Dein Name" />
+        <input type="email" placeholder="E-Mail" />
+        <input placeholder="Unternehmen / Rolle" />
+        <textarea placeholder="Deine Nachricht..."></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;grid-column:1 / -1">
+          <div class="muted" style="font-size:12px">⏱️ Antwort innerhalb eines Werktages</div>
+          <button type="submit" class="pill primary">✨ Abschicken</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="fgrid">
+        <div>
+          <div style="color:#222;margin-bottom:8px">Über dieses Mockup</div>
+          <p class="muted">Produktdetail-Layout im KoRo-Stil, übersetzt auf ein Bewerbungsprofil. Alle Inhalte Platzhalter.</p>
+        </div>
+        <div>
+          <div style="color:#222;margin-bottom:8px">Schnellzugriff</div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <a href="#desc" style="text-decoration:underline">Beschreibung</a>
+            <a href="#faq" style="text-decoration:underline">FAQs</a>
+            <a href="#refs" style="text-decoration:underline">Referenzen</a>
+          </div>
+        </div>
+        <div>
+          <div style="color:#222;margin-bottom:8px">Kontakt</div>
+          <div class="muted">alex@example.com</div>
+          <div class="muted">+43 660 000000</div>
+        </div>
+      </div>
+      <div class="copy">©️ <span id="year"></span> Profil-Deluxe</div>
+    </div>
+  </footer>
+
+  <script>
+    // Simple state & behavior (kein Framework nötig)
+    // 📸 BILDER EINBINDEN
+    // Option A (lokal, empfohlen): Lege Bilder ab unter ./assets/photos/
+    //   Beispiel: ./assets/photos/cecilia-1.jpg, ./assets/photos/cecilia-2.jpg, ./assets/photos/cecilia-3.jpg
+    //   → Trage die relativen Pfade hier ein (GitHub Pages verlangt relative Pfade!)
+    // Option B (extern): Lass die Unsplash-Links stehen oder ersetze sie durch eigene URLs.
+    // 📸 EIGENE BILDER – bitte Dateien hier ablegen und Namen anpassen
+    // Lege deine Fotos unter ./assets/photos/ ab.
+    // Achte bei GitHub Pages auf exakte Schreibweise (Groß/Klein) und relative Pfade (./assets/...)
+    const imgs = [
+      'assets/photos/cecilia-1.png',
+      'assets/photos/cecilia-2.png',
+      'assets/photos/cecilia-3.jpg'
+    ];
+    let idx = 0;
+    const mainImg = document.getElementById('mainImg');
+    const thumbs = document.getElementById('thumbs');
+    function renderThumbs(){
+      thumbs.innerHTML = imgs.map((src,i)=>⁠ <button class="${i===idx?'active':''}" onclick="go(${i})"><img src="${src}" alt="Ansicht ${i+1}"/></button> ⁠).join('');
+    }
+    function go(i){ idx = i; mainImg.src = imgs[idx]; renderThumbs(); }
+    function prevImg(){ idx = (idx-1+imgs.length)%imgs.length; mainImg.src = imgs[idx]; renderThumbs(); }
+    function nextImg(){ idx = (idx+1)%imgs.length; mainImg.src = imgs[idx]; renderThumbs(); }
+    renderThumbs();
+
+    function switchTab(e){
+      document.querySelectorAll('.tab').forEach(btn=>btn.classList.remove('active'));
+      e.target.classList.add('active');
+      const key = e.target.dataset.tab;
+      document.querySelectorAll('.panel').forEach(p=>p.style.display='none');
+      document.getElementById('panel-'+key).style.display = '';
+    }
+    // Subtab-Switch für FAQs
+    function switchSubtab(e){
+      document.querySelectorAll('.subtab').forEach(btn=>btn.classList.remove('active'));
+      e.target.classList.add('active');
+      const key = e.target.dataset.subtab;
+      document.querySelectorAll('.subpanel').forEach(p=>p.style.display='none');
+      document.getElementById('sub-'+key).style.display='';
+    }
+    function setFocus(el){
+      el.parentElement.querySelectorAll('.pill').forEach(b=>b.classList.remove('primary'));
+      el.classList.add('primary');
+    }
+    function setPack(el){
+      el.parentElement.parentElement.querySelectorAll('.pill').forEach(b=>b.classList.remove('primary'));
+      el.classList.add('primary');
+    }
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
