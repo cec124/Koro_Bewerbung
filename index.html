@@ -230,15 +230,15 @@
         </div>
       </div>
       <div class="cta">
-        <button class="pill primary">✉️ Jetzt anfragen</button>
-        <button class="pill">📞 Rückruf</button>
+        <button class="pill primary" onclick="setPack(this)">✉️ Jetzt anfragen</button>
+        <button class="pill" onclick="setPack(this)">📞 Rückruf</button>
       </div>
       <div class="muted" style="margin-top:6px">Sofort antwortbereit · i. d. R. innerhalb von 24h</div>
       <div class="grid-2" style="margin-top:16px">
         <div class="info-tile"><div class="label">Standort</div><div>Wien, AT</div></div>
-        <div class="info-tile"><div class="label">Erfahrung</div><div>5+ Jahre</div></div>
         <div class="info-tile"><div class="label">Arbeitsweise</div><div>Remote & Onsite (Berlin)</div></div>
         <div class="info-tile"><div class="label">Sprachen</div><div>DE, EN, FR</div></div>
+        <div class="info-tile"><div class="label">Linkedin</div><div>Profil</div></div>
       </div>
     </aside>
   </main>
@@ -274,7 +274,6 @@
     <div id="panel-faq" class="panel" style="display:none;margin-top:16px">
       <!-- FAQ-Subtabs: mehrere Unterbereiche -->
       <div class="subtabbar">
-        <button class="subtab active" data-subtab="ablauf" onclick="switchSubtab(event)">Ablauf</button>
         <button class="subtab" data-subtab="tools" onclick="switchSubtab(event)">Tools</button>
         <button class="subtab" data-subtab="verfugbarkeit" onclick="switchSubtab(event)">Verfügbarkeit</button>
         <button class="subtab" data-subtab="ausbildung" onclick="switchSubtab(event)">Ausbildung</button>
