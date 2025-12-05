@@ -85,34 +85,37 @@
     main.grid{display:grid;grid-template-columns:1fr;gap:24px;padding:8px 0 80px}
     @media(min-width:900px){main.grid{grid-template-columns:7fr 5fr}}
     .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .gallery .main{position:relative}
-    .gallery .main img{
-      width:100%;
-      aspect-ratio:1/1;
-      object-fit:cover;
-      background:#f3f4f6;
-      border-top-left-radius:var(--radius);
-      border-top-right-radius:var(--radius);
-      max-height:420px; /* NEU: macht das Bild etwas kleiner */
-    }
-    .gallery .thumbs{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:8px;
-      padding:12px;
-    }
-    .thumbs button{
-      border:1px solid var(--border);
-      border-radius:12px;
-      overflow:hidden;
-      cursor:pointer
-    }
-    .thumbs button.active{outline:2px solid var(--brand)}
-    .thumbs img{
-      width:100%;
-      height:64px;
-      object-fit:cover
-    }
+   .gallery .main{
+  position:relative;
+}
+.gallery .main img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  background:#f3f4f6;
+  border-top-left-radius:var(--radius);
+  border-top-right-radius:var(--radius);
+}
+.gallery .thumbs{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+  padding:12px;
+}
+.thumbs button{
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+}
+.thumbs button.active{
+  outline:2px solid var(--brand);
+}
+.thumbs img{
+  width:100%;
+  height:64px;
+  object-fit:cover;
+}
     .carousel{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.9);border-radius:999px;box-shadow:var(--shadow);display:flex;gap:4px;padding:4px}
     .iconbtn{border:none;background:transparent;border-radius:999px;padding:6px;cursor:pointer}
     .iconbtn:hover{background:#f3f4f6}
