@@ -85,7 +85,7 @@
     main.grid{display:grid;grid-template-columns:1fr;gap:24px;padding:8px 0 80px}
     @media(min-width:900px){main.grid{grid-template-columns:7fr 5fr}}
     .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-  .gallery .main{position:relative}
+    .gallery .main{position:relative}
     .gallery .main img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f3f4f6;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
     .gallery .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px}
     .thumbs button{border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer}
@@ -140,6 +140,7 @@
     .subtab.active{background:var(--btn);color:#fff;border-color:var(--btn)}
   </style>
 <head>
+</head>
 <body>
   <header class="site-header">
     <div class="container row" style="background:#697e43;">
@@ -159,13 +160,14 @@
       <!-- CV verlinken: Lege deine PDF unter ./assets/Cecilia-Vludwig-CV.pdf -->
       <a class="pill primary" href="./assets/CV_11.25.pdf" download title="PDF CV herunterladen">📥 CV herunterladen</a>
     </div>
+ </div>
 
   </header>
 <body>
   <!-- Hellgrauer Hintergrund für die Top-Bar -->
   <div class="topline" style="background:#f3f3f3;">
     <div class="container bar">
-      <div style="display:flex;gap:72px;align-items:center;color:#666;">
+      <div style="display:flex;gap:48px;align-items:center">
         <span>Schnelle Antwort</span>
         <span>Transparente Zusammenarbeit</span>
         <span class="hide-sm">Strukturierte & zuverlässige Arbeitsweise</span>
@@ -181,6 +183,7 @@
     </div>
   </div>
 
+  <main class="container grid">
     <section class="gallery card">
       <div class="main">
         <img id="mainImg" src="assets/photos/cecilia-1.png" alt="Cecilia Vludwig" />
@@ -191,7 +194,7 @@
       </div>
       <div class="thumbs" id="thumbs"></div>
     </section>
-  
+
     <aside>
       <div class="badge">Profil</div>
       <div class="meta">
