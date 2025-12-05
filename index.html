@@ -85,12 +85,59 @@
     main.grid{display:grid;grid-template-columns:1fr;gap:24px;padding:8px 0 80px}
     @media(min-width:900px){main.grid{grid-template-columns:7fr 5fr}}
     .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .gallery .main{position:relative}
-    .gallery .main img{width:100%;aspect-ratio:1/1;object-fit:cover;background:#f3f4f6;border-top-left-radius:var(--radius);border-top-right-radius:var(--radius)}
-    .gallery .thumbs{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px}
-    .thumbs button{border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer}
-    .thumbs button.active{outline:2px solid var(--brand)}
-    .thumbs img{width:100%;height:64px;object-fit:cover}
+       /* Galerie: Thumbnails links, großes Bild rechts */
+    .gallery{
+      display:flex;
+      gap:24px;
+      align-items:flex-start;
+      padding:16px;
+    }
+
+    /* Thumbnails links in einer Spalte */
+    .gallery .thumbs{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      max-height:480px;   /* Höhe der Spalte */
+      overflow-y:auto;
+      padding:0;
+    }
+
+    .gallery .thumbs button{
+      border:1px solid var(--border);
+      border-radius:12px;
+      overflow:hidden;
+      cursor:pointer;
+      padding:0;
+      background:#fff;
+    }
+
+    .gallery .thumbs button.active{
+      outline:2px solid var(--brand);
+    }
+
+    .gallery .thumbs img{
+      width:72px;
+      height:72px;
+      object-fit:cover;
+      display:block;
+    }
+
+    /* Großes Bild rechts */
+    .gallery .main{
+      position:relative;
+      flex:1;
+      max-width:600px;    /* hier stellst du die maximale Breite ein */
+    }
+
+    .gallery .main img{
+      width:100%;
+      max-height:480px;   /* hier stellst du die maximale Höhe ein */
+      object-fit:contain; /* Bild wird eingepasst, nicht beschnitten */
+      background:#f3f4f6;
+      border-radius:var(--radius);
+      display:block;
+    }
     .carousel{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.9);border-radius:999px;box-shadow:var(--shadow);display:flex;gap:4px;padding:4px}
     .iconbtn{border:none;background:transparent;border-radius:999px;padding:6px;cursor:pointer}
     .iconbtn:hover{background:#f3f4f6}
